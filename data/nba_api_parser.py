@@ -42,7 +42,7 @@ def get_all_games():
             game = {'name': g['shortName'], 'date': g['date'],
                     'hometeam': info['competitors'][0]['team']['abbreviation'], 'homeid': info['competitors'][0]['id'], 'homescore': int(info['competitors'][0]['score']),
                     'awayteam': info['competitors'][1]['team']['abbreviation'], 'awayid': info['competitors'][1]['id'], 'awayscore': int(info['competitors'][1]['score']),
-                    'time': info['status']['displayClock'], 'quarter': info['status']['period'], 'over': info['status']['type']['completed']}
+                    'time': info['status']['displayClock'], 'quarter': info['status']['period'], 'over': info['status']['type']['completed'], 'state': info['status']['type']['state']}
             games.append(game)
             # i += 1
         return games
