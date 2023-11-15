@@ -222,10 +222,10 @@ class MainRenderer:
         #     self._draw_fg()
         # Prepare the data
         # score = '{}-{}'.format(overview['awayscore'], overview['homescore'])
-        if game['possession'] == game['awayid']:
-            pos = game['awayteam']
-        else:
-            pos = game['hometeam']
+        # if game['possession'] == game['awayid']:
+        #     pos = game['awayteam']
+        # else:
+        #     pos = game['hometeam']
         quarter = str(game['quarter'])
         time_period = game['time']
         
