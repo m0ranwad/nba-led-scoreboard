@@ -117,7 +117,7 @@ class MainRenderer:
             if self.data.nba_logos:
                 # Open the logo image file
                 away_team_logo = Image.open('logos/{}H.png'.format(game['awayteam'])).resize((20, 20), 1)
-                home_team_logo = Image.open('logos/{}H.png'.format(game['hometeam'])).resize((20, 20), 1).transpose(Image.FLIP_LEFT_RIGHT)
+                home_team_logo = Image.open('logos/{}H.png'.format(game['hometeam'])).resize((20, 20), 1)
                 # Put the images on the canvas
                 self.canvas.SetImage(away_team_logo.convert("RGB"), 1, 12)
                 self.canvas.SetImage(home_team_logo.convert("RGB"), 43, 12)
@@ -156,7 +156,7 @@ class MainRenderer:
             if self.data.nba_logos:
                 # Open the logo image file
                 away_team_logo = Image.open('logos/{}H.png'.format(game['awayteam'])).resize((20, 20), 1)
-                home_team_logo = Image.open('logos/{}H.png'.format(game['hometeam'])).resize((20, 20), 1).transpose(Image.FLIP_LEFT_RIGHT)
+                home_team_logo = Image.open('logos/{}H.png'.format(game['hometeam'])).resize((20, 20), 1)
                 # Put the images on the canvas
                 self.canvas.SetImage(away_team_logo.convert("RGB"), 1, 12)
                 self.canvas.SetImage(home_team_logo.convert("RGB"), 43, 12)
@@ -206,7 +206,7 @@ class MainRenderer:
         if self.data.nba_logos:
             # Open the logo image file
             away_team_logo = Image.open('logos/{}H.png'.format(game['awayteam'])).resize((20, 20), 1)
-            home_team_logo = Image.open('logos/{}H.png'.format(game['hometeam'])).resize((20, 20), 1).transpose(Image.FLIP_LEFT_RIGHT)
+            home_team_logo = Image.open('logos/{}H.png'.format(game['hometeam'])).resize((20, 20), 1)
             # Put the images on the canvas
             self.canvas.SetImage(away_team_logo.convert("RGB"), 1, 0)
             self.canvas.SetImage(home_team_logo.convert("RGB"), 43, 0)
@@ -244,7 +244,7 @@ class MainRenderer:
         if self.data.nba_logos:
             # Open the logo image file
             away_team_logo = Image.open('logos/{}H.png'.format(game['awayteam'])).resize((20, 20), 1)
-            home_team_logo = Image.open('logos/{}H.png'.format(game['hometeam'])).resize((20, 20), 1).transpose(Image.FLIP_LEFT_RIGHT)
+            home_team_logo = Image.open('logos/{}H.png'.format(game['hometeam'])).resize((20, 20), 1)
             # Put the images on the canvas
             self.canvas.SetImage(away_team_logo.convert("RGB"), 1, 0)
             self.canvas.SetImage(home_team_logo.convert("RGB"), 43, 0)
