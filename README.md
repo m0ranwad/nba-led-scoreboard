@@ -1,42 +1,37 @@
-# nfl-led-scoreboard
-![I promise to change this picture when I actually build my own](imgs/scoreboard.jpg)
+# nba-led-scoreboard
+![I promise to change this picture when I actually build my own](imgs/pregame_state.jpg)
 
-Display your favourite NFL team score on an raspberry pi powered LED matrix. Currently supports 64x32 boards only.
+Display daily NBA action on an raspberry pi powered LED matrix. Currently supports 64x32 boards only.
 
 ### Credit and inpsiration
-This project and my [Fantasy Football scoreboard project](https://github.com/mikemountain/fantasy-football-scoreboard) were inspired by the [nhl-led-scoreboard](https://github.com/riffnshred/nhl-led-scoreboard), who based THEIR project off of the [mlb-led-scoreboard](https://github.com/MLB-LED-Scoreboard/mlb-led-scoreboard). Go check them out, and start watching hockey if you don't already (and baseball too but I love hockey more (go Leafs!)).
+This project was inspired by the [nfl-led-scoreboard](https://github.com/mikemountain/nfl-led-scoreboard/) which was inspired by the [nhl-led-scoreboard](https://github.com/riffnshred/nhl-led-scoreboard), who based THEIR project off of the [mlb-led-scoreboard](https://github.com/MLB-LED-Scoreboard/mlb-led-scoreboard). Go check them out.
 
 ### Donate
-<a href="https://paypal.me/themikemountain/"><img src="https://github.com/andreostrovsky/donate-with-paypal/blob/master/dark.svg" height="40"></a>  
-If you enjoyed this project, my NFL project, or if you're just feeling generous, consider buying me a beer. Cheers! :beers: 
-You can also PM me on reddit under /u/mikemountain if you need help but don't think it requires an issue!
+<a href="https://paypal.me/kircherbrian"><img src="https://github.com/andreostrovsky/donate-with-paypal/blob/master/dark.svg" height="40"></a>  
+If you enjoy this project, consider buying me a beer. Cheers! :beers: 
 
-## Features (v0.1.0)
+## Features (v1.0.0)
 
 ### GAME ROTATION
-Hey, neat-o! You can rotate through multiple games now if you want to! Will still need some finessing, but definitely an improvement.
+The display will rotate through all of the NBA action for the current day. 
 
 ### Pregame
-Currently shows the team logos and the game time. ![pregame](imgs/pregame.jpg)
+Currently shows the team logos and tip-off time. This uses the time-zone configured for your pi. [pregame](imgs/pregame_two.jpg)
 
 ### Live scoring updates 
-The score updates every 3 seconds. The scoreboard will display, from top to bottom: quarter, time remaining in quarter, team with possession, down and yards to gain, and the position of the line of scrimmage. ![scoreboard](imgs/scoreboard.jpg) When a team is in the redzone, their name will light up red. ![rz](imgs/rz.jpg)
+The score updates every 3 seconds. Currently, the scoreboard will display the Quarter and Time Remaining. Expect feature updates with live spreads on the road-map[scoreboard](imgs/livegame_state.jpg)
 
 ### Postgame
-Just kind of looks like the pre-game screen but with the final scores. ![final score](imgs/postgame.jpg)
-
-### Off season
-It displays a message that it's the off season. You should just turn it off and plan to be heartbroken again next year.
-
-### Preseason
-Nothing yet because I didn't even think the season would start because of COVID.
+Looks similar to the Pre-game screen, but with the final scores. I'll get a preview in the README soon enough.
 
 ## Roadmap
 
 Future plans include:
-* team colours for the score/possession maybe?
-* better/more gifs I guess?
-* general stability? I actually achieved all the goals I set out to do with this thing so I dunno what else I wanna do.
+* Sportsbook Integrations. One of my first priorities will be to include spreads on pre-game and live scoring screens. 
+* UI Improvements. I'm brand new to LED Matrix's, so I'm hoping for help from the community with tweaking the appearance of the scoreboard.
+* Allow users to choose between Logos or Team Names
+* Favorite Team Support: Consider this a backlog item. My use case for this board is primarily to cycle and rotate through games. However, since I'm reusing code from the NFL Scoreboard, I'll try to document and provide support to those of you who would prefer to have a fixed team or game on the display. 
+* Stats: Similar to an actual sports ticker, I'd like to provide real-time stats for top scorers (etc) for each game. We already get this data from the ESPN API, so it's just a matter of how we want to display it. 
 
 ## Installation
 ### Hardware Assembly
@@ -44,7 +39,10 @@ The [mlb-led-scoreboard guys made a great wiki page to cover the hardware part o
 
 ### Software Installation
 #### Raspbian Distribution
-It is recommended you install the Lite version of Raspbian from the [Raspbian Downloads Page](https://www.raspberrypi.org/downloads/raspbian/). This version lacks a GUI, allowing your Pi to dedicate more system resources to drawing the screen.
+It is recommended you install Raspberry PI OS (Legacy) Lite. This version lacks a GUI, allowing your Pi to dedicate more system resources to drawing the screen.
+
+After struggling with the installation of the NFL LED Scoreboard, I found this step to be absolutely necessary. This code does not presently support Python 3.11 which is installed in the latest versions of Raspberry Pi OS. The Legacy OS currently installs Python 3.9 which is supported. 
+
 Make sure to set the timezone to your local timezone!
 
 #### Requirements
@@ -58,8 +56,8 @@ sudo apt-get install git python-pip
 This installation process might take some time because it will install all the dependencies listed below.
 
 ```
-git clone --recursive https://github.com/mikemountain/nfl-led-scoreboard
-cd nfl-led-scoreboard/
+git clone --recursive https://github.com/bkircher/nba-led-scoreboard
+cd nba-led-scoreboard/
 sudo chmod +x install.sh
 sudo ./install.sh
 ```
@@ -82,15 +80,11 @@ If you are using any thing from raspberry pi 3+ to the newest versions with an A
 
 Finally, here's the command he used.
 ```
-sudo python main.py --led-gpio-mapping=adafruit-hat-pwm --led-brightness=60 --led-slowdown-gpio=2
+sudo python main.py --led-gpio-mapping=adafruit-hat-pwm --led-brightness=60 --led-slowdown-gpio=3
 ```
 
 ## Usage
-Open the config.json file from the root folder and change these values:
 
-* ```fav_team``` Set this as your favourite team, but it doesn't do anything yet (for next season)
-
-Now, in a terminal, cd to the nfl-led-scoreboard folder and run this command. 
 ```
 sudo python main.py 
 ```

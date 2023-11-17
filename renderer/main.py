@@ -80,15 +80,6 @@ class MainRenderer:
         else:
             return False
 
-        # figure this out later heh
-        # showing_preferred_team = self.data.config.preferred_teams[0] in [game.awayteam, game.hometeam]
-        # if showing_preferred_team and game['status']:
-        #     if self.data.config.rotation_preferred_team_live_mid_inning == True and Status.is_inning_break(overview.inning_state):
-        #         return True
-        #     return False
-
-        # return True
-
     def __draw_game(self, game):
         time = self.data.get_current_date()
         gametime = datetime.strptime(game['date'], "%Y-%m-%dT%H:%MZ")
@@ -123,7 +114,7 @@ class MainRenderer:
             self.draw.text((25, 15), 'VS', font=self.font)
             # Put the data on the canvas
             self.canvas.SetImage(self.image, 0, 0)
-            if self.data.helmet_logos:
+            if self.data.nba_logos:
                 # Open the logo image file
                 away_team_logo = Image.open('logos/{}H.png'.format(game['awayteam'])).resize((20, 20), 1)
                 home_team_logo = Image.open('logos/{}H.png'.format(game['hometeam'])).resize((20, 20), 1).transpose(Image.FLIP_LEFT_RIGHT)
@@ -137,17 +128,7 @@ class MainRenderer:
                 # Put the images on the canvas
                 self.canvas.SetImage(away_team_logo.convert("RGB"), 1, 12)
                 self.canvas.SetImage(home_team_logo.convert("RGB"), 43, 12)
-                # awaysize = self.screen_config.team_logos_pos[game['awayteam']]['size']
-                # homesize = self.screen_config.team_logos_pos[game['hometeam']]['size']
-                # # Set the position of each logo
-                # away_team_logo_pos = self.screen_config.team_logos_pos[game['awayteam']]['preaway']
-                # home_team_logo_pos = self.screen_config.team_logos_pos[game['hometeam']]['prehome']
-                # # Open the logo image file
-                # away_team_logo = Image.open('logos/{}.png'.format(game['awayteam'])).resize((awaysize, awaysize), 1)
-                # home_team_logo = Image.open('logos/{}.png'.format(game['hometeam'])).resize((homesize, homesize), 1)
-                # # Put the images on the canvas
-                # self.canvas.SetImage(away_team_logo.convert("RGB"), away_team_logo_pos["x"], away_team_logo_pos["y"])
-                # self.canvas.SetImage(home_team_logo.convert("RGB"), home_team_logo_pos["x"], home_team_logo_pos["y"])
+
             # Load the canvas on screen.
             self.canvas = self.matrix.SwapOnVSync(self.canvas)
             # Refresh the Data image.
@@ -172,7 +153,7 @@ class MainRenderer:
             self.draw.text((25, 15), 'VS', font=self.font)
             # Put the data on the canvas
             self.canvas.SetImage(self.image, 0, 0)
-            if self.data.helmet_logos:
+            if self.data.nba_logos:
                 # Open the logo image file
                 away_team_logo = Image.open('logos/{}H.png'.format(game['awayteam'])).resize((20, 20), 1)
                 home_team_logo = Image.open('logos/{}H.png'.format(game['hometeam'])).resize((20, 20), 1).transpose(Image.FLIP_LEFT_RIGHT)
@@ -186,17 +167,6 @@ class MainRenderer:
                 # Put the images on the canvas
                 self.canvas.SetImage(away_team_logo.convert("RGB"), 1, 12)
                 self.canvas.SetImage(home_team_logo.convert("RGB"), 43, 12)
-                # awaysize = self.screen_config.team_logos_pos[game['awayteam']]['size']
-                # homesize = self.screen_config.team_logos_pos[game['hometeam']]['size']
-                # # Set the position of each logo
-                # away_team_logo_pos = self.screen_config.team_logos_pos[game['awayteam']]['preaway']
-                # home_team_logo_pos = self.screen_config.team_logos_pos[game['hometeam']]['prehome']
-                # # Open the logo image file
-                # away_team_logo = Image.open('logos/{}.png'.format(game['awayteam'])).resize((awaysize, awaysize), 1)
-                # home_team_logo = Image.open('logos/{}.png'.format(game['hometeam'])).resize((homesize, homesize), 1)
-                # # Put the images on the canvas
-                # self.canvas.SetImage(away_team_logo.convert("RGB"), away_team_logo_pos["x"], away_team_logo_pos["y"])
-                # self.canvas.SetImage(home_team_logo.convert("RGB"), home_team_logo_pos["x"], home_team_logo_pos["y"])
             # Load the canvas on screen.
             self.canvas = self.matrix.SwapOnVSync(self.canvas)
             # Refresh the Data image.
@@ -213,19 +183,6 @@ class MainRenderer:
             debug.info('Refresh game overview')
             self.data.refresh_games()
             self.data.needs_refresh = False
-        # Use this code if you want the animations to run
-        # if game['homescore'] > homescore + 5 or game['awayscore'] > awayscore + 5:
-        #     debug.info('should draw TD')
-        #     self._draw_td()
-        # elif game['homescore'] > homescore + 2 or game['awayscore'] > awayscore + 2:
-        #     debug.info('should draw FG')
-        #     self._draw_fg()
-        # Prepare the data
-        # score = '{}-{}'.format(overview['awayscore'], overview['homescore'])
-        # if game['possession'] == game['awayid']:
-        #     pos = game['awayteam']
-        # else:
-        #     pos = game['hometeam']
         quarter = str(game['quarter'])
         time_period = game['time']
         
@@ -246,7 +203,7 @@ class MainRenderer:
         self.draw.multiline_text((59 - home_score_size, 19), homescore, fill=(255, 255, 255), font=self.font, align="center")
         # Put the data on the canvas
         self.canvas.SetImage(self.image, 0, 0)
-        if self.data.helmet_logos:
+        if self.data.nba_logos:
             # Open the logo image file
             away_team_logo = Image.open('logos/{}H.png'.format(game['awayteam'])).resize((20, 20), 1)
             home_team_logo = Image.open('logos/{}H.png'.format(game['hometeam'])).resize((20, 20), 1).transpose(Image.FLIP_LEFT_RIGHT)
@@ -261,23 +218,6 @@ class MainRenderer:
             self.canvas.SetImage(away_team_logo.convert("RGB"), 1, 0)
             self.canvas.SetImage(home_team_logo.convert("RGB"), 43, 0)
         # Set the position of each logo on screen.
-        # awaysize = self.screen_config.team_logos_pos[game['awayteam']]['size']
-        # homesize = self.screen_config.team_logos_pos[game['hometeam']]['size']
-        # # Set the position of each logo
-        # away_team_logo_pos = self.screen_config.team_logos_pos[game['awayteam']]['away']
-        # home_team_logo_pos = self.screen_config.team_logos_pos[game['hometeam']]['home']
-        # # Open the logo image file
-        # away_team_logo = Image.open('logos/{}.png'.format(game['awayteam'])).resize((19, 19), 1)
-        # home_team_logo = Image.open('logos/{}.png'.format(game['hometeam'])).resize((19, 19), 1)
-        # Draw the text on the Data image.
-        # self.draw.multiline_text((quarter_position, 0), quarter, fill=(255, 255, 255), font=self.font_mini, align="center")
-        # self.draw.multiline_text((time_period_pos, 6), time_period, fill=(255, 255, 255), font=self.font_mini, align="center")
-        # self.draw.multiline_text((6, 19), awayscore, fill=(255, 255, 255), font=self.font, align="center")
-        # self.draw.multiline_text((59 - home_score_size, 19), homescore, fill=(255, 255, 255), font=self.font, align="center")
-        # self.draw.multiline_text((score_position, 19), score, fill=(255, 255, 255), font=self.font, align="center")
-        # Put the images on the canvas
-        # self.canvas.SetImage(away_team_logo.convert("RGB"), away_team_logo_pos["x"], away_team_logo_pos["y"])
-        # self.canvas.SetImage(home_team_logo.convert("RGB"), home_team_logo_pos["x"], home_team_logo_pos["y"])
         # Load the canvas on screen.
         self.canvas = self.matrix.SwapOnVSync(self.canvas)
         # Refresh the Data image.
@@ -301,7 +241,7 @@ class MainRenderer:
         self.draw.multiline_text((26, 0), "END", fill=(255, 255, 255), font=self.font_mini,align="center")
         # Put the data on the canvas
         self.canvas.SetImage(self.image, 0, 0)
-        if self.data.helmet_logos:
+        if self.data.nba_logos:
             # Open the logo image file
             away_team_logo = Image.open('logos/{}H.png'.format(game['awayteam'])).resize((20, 20), 1)
             home_team_logo = Image.open('logos/{}H.png'.format(game['hometeam'])).resize((20, 20), 1).transpose(Image.FLIP_LEFT_RIGHT)
@@ -315,80 +255,8 @@ class MainRenderer:
             # Put the images on the canvas
             self.canvas.SetImage(away_team_logo.convert("RGB"), 1, 0)
             self.canvas.SetImage(home_team_logo.convert("RGB"), 43, 0)
-        # awaysize = self.screen_config.team_logos_pos[overview['hometeam']]['size']
-        # homesize = self.screen_config.team_logos_pos[overview['awayteam']]['size']
-        # awaysize = self.screen_config.team_logos_pos[game['awayteam']]['size']
-        # homesize = self.screen_config.team_logos_pos[game['hometeam']]['size']
-        # Set the position of each logo
-        # away_team_logo_pos = self.screen_config.team_logos_pos[overview['hometeam']]['away']
-        # home_team_logo_pos = self.screen_config.team_logos_pos[overview['awayteam']]['home']
-        # away_team_logo_pos = self.screen_config.team_logos_pos[game['awayteam']]['away']
-        # home_team_logo_pos = self.screen_config.team_logos_pos[game['hometeam']]['home']
-        # Open the logo image file
-        # away_team_logo = Image.open('logos/{}.png'.format(overview['hometeam'])).resize((awaysize, awaysize), 1)
-        # home_team_logo = Image.open('logos/{}.png'.format(overview['awayteam'])).resize((homesize, homesize), 1)
-        # away_team_logo = Image.open('logos/{}.png'.format(game['awayteam'])).resize((19, 19), 1)
-        # home_team_logo = Image.open('logos/{}.png'.format(game['hometeam'])).resize((19, 19), 1)
-        # Put the images on the canvas
-        # self.canvas.SetImage(away_team_logo.convert("RGB"), away_team_logo_pos["x"], away_team_logo_pos["y"])
-        # self.canvas.SetImage(home_team_logo.convert("RGB"), home_team_logo_pos["x"], home_team_logo_pos["y"])
         # Load the canvas on screen.
         self.canvas = self.matrix.SwapOnVSync(self.canvas)
         # Refresh the Data image.
         self.image = Image.new('RGB', (self.width, self.height))
         self.draw = ImageDraw.Draw(self.image)
-
-    # def _draw_td(self):
-    #     debug.info('TD')
-    #     # Load the gif file
-    #     ball = Image.open("assets/td_ball.gif")
-    #     words = Image.open("assets/td_words.gif")
-    #     # Set the frame index to 0
-    #     frameNo = 0
-    #     self.canvas.Clear()
-    #     # Go through the frames
-    #     x = 0
-    #     while x is not 3:
-    #         try:
-    #             ball.seek(frameNo)
-    #         except EOFError:
-    #             x += 1
-    #             frameNo = 0
-    #             ball.seek(frameNo)
-    #         self.canvas.SetImage(ball.convert('RGB'), 0, 0)
-    #         self.canvas = self.matrix.SwapOnVSync(self.canvas)
-    #         frameNo += 1
-    #         t.sleep(0.05)
-    #     x = 0
-    #     while x is not 3:
-    #         try:
-    #             words.seek(frameNo)
-    #         except EOFError:
-    #             x += 1
-    #             frameNo = 0
-    #             words.seek(frameNo)
-    #         self.canvas.SetImage(words.convert('RGB'), 0, 0)
-    #         self.canvas = self.matrix.SwapOnVSync(self.canvas)
-    #         frameNo += 1
-    #         t.sleep(0.05)
-
-    # def _draw_fg(self):
-    #     debug.info('FG')
-    #     # Load the gif file
-    #     im = Image.open("assets/fg.gif")
-    #     # Set the frame index to 0
-    #     frameNo = 0
-    #     self.canvas.Clear()
-    #     # Go through the frames
-    #     x = 0
-    #     while x is not 3:
-    #         try:
-    #             im.seek(frameNo)
-    #         except EOFError:
-    #             x += 1
-    #             frameNo = 0
-    #             im.seek(frameNo)
-    #         self.canvas.SetImage(im.convert('RGB'), 0, 0)
-    #         self.canvas = self.matrix.SwapOnVSync(self.canvas)
-    #         frameNo += 1
-    #         t.sleep(0.02)

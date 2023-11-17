@@ -1,6 +1,6 @@
 {
 	"preferred": {
-		"teams": ["BUF", "NO", "TB"]
+		"teams": ["CLE", "MIA", "ORL"]
 	},
 	"rotation": {
 		"enabled": true,
@@ -16,6 +16,6 @@
 		}
 	},
     "scrolling_speed": 2,
-    "use_helmet_logos": true,
+    "use_nba_logos": true,
     "debug": "true"
 }
