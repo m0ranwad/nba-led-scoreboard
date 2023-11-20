@@ -56,7 +56,7 @@ sudo apt-get install git python-pip
 This installation process might take some time because it will install all the dependencies listed below.
 
 ```
-git clone --recursive https://github.com/bkircher/nba-led-scoreboard
+git clone --recursive https://github.com/m0ranwad/nba-led-scoreboard
 cd nba-led-scoreboard/
 sudo chmod +x install.sh
 sudo ./install.sh
