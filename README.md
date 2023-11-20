@@ -19,7 +19,7 @@ The display will rotate through all of the NBA action for the current day.
 Currently shows the team logos and tip-off time. This uses the time-zone configured for your pi. ![pregame](imgs/pregame_two.jpg)
 
 ### Live scoring updates 
-The score updates every 3 seconds. Currently, the scoreboard will display the Quarter and Time Remaining. Expect feature updates with live spreads on the road-map ![scoreboard](imgs/livegame_state.jpg)
+The score updates every 3 seconds. Currently, the scoreboard will display the Quarter and Time Remaining. Expect feature updates with live spreads on the road-map ![scoreboard](imgs/liveGame_state.jpg)
 
 ### Postgame
 Looks similar to the Pre-game screen, but with the final scores. I'll get a preview in the README soon enough.
