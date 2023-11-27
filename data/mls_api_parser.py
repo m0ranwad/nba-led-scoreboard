@@ -3,7 +3,7 @@ import datetime
 import time as t
 from utils import convert_time
 
-URL = "http://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard"
+URL = "http://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/scoreboard"
 
 def get_all_games():
     # for i in range(5):
