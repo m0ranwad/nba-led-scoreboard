@@ -1,6 +1,6 @@
 {
 	"preferred": {
-		"teams": ["CLE", "MIA", "ORL"]
+		"teams": ["KC", "MIA", "ORL"]
 	},
 	"rotation": {
 		"enabled": true,
@@ -16,6 +16,6 @@
 		}
 	},
     "scrolling_speed": 2,
-    "use_nba_logos": true,
+    "use_mls_logos": true,
     "debug": "true"
 }
