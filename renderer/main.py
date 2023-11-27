@@ -112,6 +112,9 @@ class MainRenderer:
             self.draw.text((date_pos, 0), date_text, font=self.font_mini)
             self.draw.multiline_text((gametime_pos, 6), gametime, fill=(255, 255, 255), font=self.font_mini, align="center")
             self.draw.text((25, 15), 'VS', font=self.font)
+            # Draw the pre-game Moneyline Odds
+            self.draw.text((1, 6), game['away_moneyline'], font=self.font_mini, fill=(0, 255, 0))
+            self.draw.text((46, 6), game['home_moneyline'], font=self.font_mini, fill=(0, 255, 0))
             # Put the data on the canvas
             self.canvas.SetImage(self.image, 0, 0)
             if self.data.nba_logos:
@@ -151,6 +154,9 @@ class MainRenderer:
             self.draw.text((29, 0), 'IN', font=self.font_mini)
             self.draw.multiline_text((gametime_pos, 6), gametime, fill=(255, 255, 255), font=self.font_mini, align="center")
             self.draw.text((25, 15), 'VS', font=self.font)
+            # Draw the pre-game Moneyline Odds
+            self.draw.text((1, 6), game['away_moneyline'], font=self.font_mini, fill=(0, 255, 0))
+            self.draw.text((46, 6), game['home_moneyline'], font=self.font_mini, fill=(0, 255, 0))
             # Put the data on the canvas
             self.canvas.SetImage(self.image, 0, 0)
             if self.data.nba_logos:
@@ -195,12 +201,16 @@ class MainRenderer:
         time_period_pos = center_text(self.font_mini.getsize(time_period)[0], 32)
         # score_position = center_text(self.font.getsize(score)[0], 32)
         quarter_position = center_text(self.font_mini.getsize(quarter)[0], 32)
+        away_odds_position = (2, 26)  # Example position for away team odds
+        home_odds_position = (48, 26)  # Example position for home team odds
         # info_pos = center_text(self.font_mini.getsize(pos)[0], 32)
         # self.draw.multiline_text((info_pos, 13), pos, fill=pos_colour, font=self.font_mini, align="center")
         self.draw.multiline_text((quarter_position, 0), quarter, fill=(255, 255, 255), font=self.font_mini, align="center")
         self.draw.multiline_text((time_period_pos, 6), time_period, fill=(255, 255, 255), font=self.font_mini, align="center")
         self.draw.multiline_text((6, 19), awayscore, fill=(255, 255, 255), font=self.font, align="center")
         self.draw.multiline_text((59 - home_score_size, 19), homescore, fill=(255, 255, 255), font=self.font, align="center")
+        self.draw.text(away_odds_position, game['away_moneyline'], font=self.font_mini, fill=(0, 255, 0))
+        self.draw.text(home_odds_position, game['home_moneyline'], font=self.font_mini, fill=(0, 255, 0))
         # Put the data on the canvas
         self.canvas.SetImage(self.image, 0, 0)
         if self.data.nba_logos:
