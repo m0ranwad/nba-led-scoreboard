@@ -24,6 +24,7 @@ class MainRenderer:
         # Load the fonts
         self.font = ImageFont.truetype("fonts/score_large.otf", 16)
         self.font_mini = ImageFont.truetype("fonts/04B_24__.TTF", 8)
+        self.font_tiny = ImageFont.truetype("fonts/04B_24__.TTF", 6)
 
     def render(self):
         while True:
@@ -79,6 +80,12 @@ class MainRenderer:
             return True
         else:
             return False
+        
+    def draw_vertical_text(self, x, y_start, text, font, fill):
+        # Draws text vertically at the given (x, y_start) coordinates.
+        for i, char in enumerate(text):
+            y = y_start + i * (font.getsize(char)[1] + 1)  # Adding a small space between characters
+            self.draw.text((x, y), char, font=font, fill=fill)
 
     def __draw_game(self, game):
         time = self.data.get_current_date()
@@ -201,17 +208,25 @@ class MainRenderer:
         time_period_pos = center_text(self.font_mini.getsize(time_period)[0], 32)
         # score_position = center_text(self.font.getsize(score)[0], 32)
         quarter_position = center_text(self.font_mini.getsize(quarter)[0], 32)
-        away_odds_position = (2, 26)  # Example position for away team odds
-        home_odds_position = (48, 26)  # Example position for home team odds
+        # away_odds_position = (2, 26)  # Example position for away team odds
+        # home_odds_position = (48, 26)  # Example position for home team odds
         # info_pos = center_text(self.font_mini.getsize(pos)[0], 32)
         # self.draw.multiline_text((info_pos, 13), pos, fill=pos_colour, font=self.font_mini, align="center")
+        # Example positions for vertical odds - you'll need to adjust these based on your matrix
+        away_odds_x = 1  # x position for away team odds
+        home_odds_x = self.width - 6  # x position for home team odds, assuming 6 is the width of a character
+        # Vertical starting position for odds (adjust as needed)
+        vertical_start_y = 20  # Starting y coordinate
+
+        # Draw the live game Moneyline Odds vertically
+        self.draw_vertical_text(away_odds_x, vertical_start_y, game['away_moneyline'], self.font_tiny, fill=(0, 255, 0))
+        self.draw_vertical_text(home_odds_x, vertical_start_y, game['home_moneyline'], self.font_tiny, fill=(0, 255, 0))
+
         self.draw.multiline_text((quarter_position, 0), quarter, fill=(255, 255, 255), font=self.font_mini, align="center")
         self.draw.multiline_text((time_period_pos, 6), time_period, fill=(255, 255, 255), font=self.font_mini, align="center")
         self.draw.multiline_text((6, 19), awayscore, fill=(255, 255, 255), font=self.font, align="center")
         self.draw.multiline_text((59 - home_score_size, 19), homescore, fill=(255, 255, 255), font=self.font, align="center")
-        self.draw.text(away_odds_position, game['away_moneyline'], font=self.font_mini, fill=(0, 255, 0))
-        self.draw.text(home_odds_position, game['home_moneyline'], font=self.font_mini, fill=(0, 255, 0))
-        # Put the data on the canvas
+         # Put the data on the canvas
         self.canvas.SetImage(self.image, 0, 0)
         if self.data.nba_logos:
             # Open the logo image file
