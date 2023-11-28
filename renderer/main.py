@@ -213,8 +213,8 @@ class MainRenderer:
         # info_pos = center_text(self.font_mini.getsize(pos)[0], 32)
         # self.draw.multiline_text((info_pos, 13), pos, fill=pos_colour, font=self.font_mini, align="center")
         # Example positions for vertical odds - you'll need to adjust these based on your matrix
-        away_odds_x = 1  # x position for away team odds
-        home_odds_x = self.width - 6  # x position for home team odds, assuming 6 is the width of a character
+        away_odds_x = 20  # x position for away team odds
+        home_odds_x = 40  # x position for home team odds, assuming 6 is the width of a character
         # Vertical starting position for odds (adjust as needed)
         vertical_start_y = 16  # Starting y coordinate
 
