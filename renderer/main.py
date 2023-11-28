@@ -24,7 +24,7 @@ class MainRenderer:
         # Load the fonts
         self.font = ImageFont.truetype("fonts/score_large.otf", 16)
         self.font_mini = ImageFont.truetype("fonts/04B_24__.TTF", 8)
-        self.font_tiny = ImageFont.truetype("fonts/tom-thumb.TTF", 6)
+        self.font_tiny = ImageFont.truetype("fonts/CG pixel 3x5.TTF", 6)
 
     def render(self):
         while True:
