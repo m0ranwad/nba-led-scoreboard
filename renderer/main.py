@@ -24,7 +24,7 @@ class MainRenderer:
         # Load the fonts
         self.font = ImageFont.truetype("fonts/score_large.otf", 16)
         self.font_mini = ImageFont.truetype("fonts/04B_24__.TTF", 8)
-        self.font_tiny = ImageFont.truetype("fonts/04B_03__.TTF", 7)
+        self.font_tiny = ImageFont.truetype("fonts/04B_03__.TTF", 8)
 
     def render(self):
         while True:
@@ -216,7 +216,7 @@ class MainRenderer:
         away_odds_x = 20  # x position for away team odds
         home_odds_x = 40  # x position for home team odds, assuming 6 is the width of a character
         # Vertical starting position for odds (adjust as needed)
-        vertical_start_y = 10  # Starting y coordinate
+        vertical_start_y = 4  # Starting y coordinate
 
         # Draw the live game Moneyline Odds vertically
         self.draw_vertical_text(away_odds_x, vertical_start_y, game['away_moneyline'], self.font_tiny, fill=(0, 255, 0))
