@@ -216,7 +216,7 @@ class MainRenderer:
         away_odds_x = 20  # x position for away team odds
         home_odds_x = 40  # x position for home team odds, assuming 6 is the width of a character
         # Vertical starting position for odds (adjust as needed)
-        vertical_start_y = 16  # Starting y coordinate
+        vertical_start_y = 10  # Starting y coordinate
 
         # Draw the live game Moneyline Odds vertically
         self.draw_vertical_text(away_odds_x, vertical_start_y, game['away_moneyline'], self.font_tiny, fill=(0, 255, 0))
