@@ -57,6 +57,13 @@ def get_all_games():
         for game_info in games_data:
             competition_info = game_info['competitions'][0]
             game_id = game_info['id']
+            game_state = competition_info['status']['type']['state']
+
+            # Fetch moneyline odds only if the game is in the pre-game state
+            if game_state == 'pre':
+                away_ml, home_ml = get_moneyline_odds(game_id)
+            else:
+                away_ml, home_ml = "", ""
 
             away_ml, home_ml = get_moneyline_odds(game_id)
 
