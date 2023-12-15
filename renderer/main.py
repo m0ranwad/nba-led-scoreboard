@@ -27,10 +27,9 @@ class MainRenderer:
         self.font_tiny = ImageFont.truetype("fonts/04B_03__.TTF", 8)
 
     def refresh_display(self):
+        self.canvas = self.matrix.SwapOnVSync(self.canvas)
         self.image = Image.new('RGB', (self.width, self.height))
         self.draw = ImageDraw.Draw(self.image)
-        self.canvas.SetImage(self.image, 0, 0)
-        self.canvas = self.matrix.SwapOnVSync(self.canvas)
 
     def display_nba_logo(self):
         nba_logo = Image.open('logos/NBA.png').resize((22, 22), Image.ANTIALIAS)
@@ -123,7 +122,7 @@ class MainRenderer:
         gametime = datetime.strptime(game['date'], "%Y-%m-%dT%H:%MZ")
 
         if game['state'] == 'pre':
-            if current_time < gametime - timedelta(hours=1):
+            if current_time > gametime - timedelta(hours=1):
                 debug.info('Countdown til gametime')
                 self._draw_countdown(game)
             else:
@@ -142,6 +141,7 @@ class MainRenderer:
     def loading(self):
         loading_pos = center_text(self.font_mini.getsize('Loading')[0], 32)
         self.draw.multiline_text((loading_pos, 24), 'Loading...', font=self.font_mini, align="center")
+        self.canvas.SetImage(self.image, 0, 0)
         self.display_nba_logo()
         self.refresh_display()
         if self.data is not None:
@@ -159,6 +159,7 @@ class MainRenderer:
 
     def error_screen(self):
         self.draw.multiline_text((24, 24), 'Error', fill=(255, 55, 25), font=self.font_mini, align="center")
+        self.canvas.SetImage(self.image, 0, 0)
         self.display_nba_logo()
         self.refresh_display()
         t.sleep(30)
@@ -190,8 +191,8 @@ class MainRenderer:
         self.draw.text((25, 15), 'VS', font=self.font)
 
         # Draw the pre-game Moneyline Odds
-        self.draw.text((1, 4), game['away_moneyline'], font=self.font_mini, fill=(0, 255, 0))
-        self.draw.text((46, 4), game['home_moneyline'], font=self.font_mini, fill=(0, 255, 0))
+        self.draw.text((1, 3), game['away_moneyline'], font=self.font_mini, fill=(0, 255, 0))
+        self.draw.text((46, 3), game['home_moneyline'], font=self.font_mini, fill=(0, 255, 0))
         # Draw Logos
         self.display_team_logos(game, (1, 12), (43, 12))
         # Load the canvas on screen.
@@ -224,8 +225,8 @@ class MainRenderer:
             self.draw.text((25, 15), 'VS', font=self.font)
 
             # Draw the pre-game Moneyline Odds
-            self.draw.text((1, 4), game['away_moneyline'], font=self.font_mini, fill=(0, 255, 0))
-            self.draw.text((46, 4), game['home_moneyline'], font=self.font_mini, fill=(0, 255, 0))
+            self.draw.text((1, 3), game['away_moneyline'], font=self.font_mini, fill=(0, 255, 0))
+            self.draw.text((46, 3), game['home_moneyline'], font=self.font_mini, fill=(0, 255, 0))
             # Draw Logos
             self.display_team_logos(game, (1, 12), (43, 12)) 
             # Load the canvas on screen.
@@ -256,8 +257,6 @@ class MainRenderer:
         time_period_pos = center_text(self.font_mini.getsize(time_period)[0], 32)
         # score_position = center_text(self.font.getsize(score)[0], 32)
         quarter_position = center_text(self.font_mini.getsize(quarter)[0], 32)
-        # away_odds_position = (2, 26)  # Example position for away team odds
-        # home_odds_position = (48, 26)  # Example position for home team odds
         # info_pos = center_text(self.font_mini.getsize(pos)[0], 32)
         # self.draw.multiline_text((info_pos, 13), pos, fill=pos_colour, font=self.font_mini, align="center")
 
