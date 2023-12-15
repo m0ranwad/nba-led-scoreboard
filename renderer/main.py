@@ -26,11 +26,17 @@ class MainRenderer:
         self.font_mini = ImageFont.truetype("fonts/04B_24__.TTF", 8)
         self.font_tiny = ImageFont.truetype("fonts/04B_03__.TTF", 8)
 
-    def render(self):
-        while True:
+   def render(self):
+
+        try:
+            self.loading()
             self.starttime = t.time()
             self.data.get_current_date()
             self.__render_game()
+        except Exception as e:
+            print(f"Error: {e}")
+            t.sleep(1.2)
+            self.error_screen()
 
     def __render_game(self):
         while True:
@@ -97,6 +103,45 @@ class MainRenderer:
             debug.info('Live State, checking every 5s')
             self._draw_live_game(game)
         debug.info('ping render_game')
+
+    def loading(self):
+        loading_pos = center_text(self.font_mini.getsize('Loading')[0], 32)
+        self.draw.multiline_text((loading_pos, 24), 'Loading...', font=self.font_mini, align="center")
+        self.canvas.SetImage(self.image, 0, 0)
+        nba_logo = Image.open('/logos/NBA.png').resize((22, 22), 1)
+        # Put the images on the canvas
+        self.canvas.SetImage(nba_logo.convert("RGB"), 22, 1)
+        # Load the canvas on screen.
+        self.canvas = self.matrix.SwapOnVSync(self.canvas)
+        # Refresh the Data image.
+        self.image = Image.new('RGB', (self.width, self.height))
+        self.draw = ImageDraw.Draw(self.image)
+        if self.data is not None:
+           pass
+        elif self.data is None:
+           print('NONE')
+           pass
+        else:
+            # Handle the case where data is not passed
+            # t.sleep(2)
+            print("Error getting Data, ESPN API may be down.")
+            t.sleep(30)
+            sys.exit(1)
+
+    def error_screen(self):
+        self.draw.multiline_text((24, 24), 'Error', fill=(255, 55, 25), font=self.font_mini, align="center")
+        self.canvas.SetImage(self.image, 0, 0)
+        nba_logo = Image.open('/logos/nba.png').resize((22, 22), 1)
+        # Put the images on the canvas
+        self.canvas.SetImage(nba_logo.convert("RGB"), 22, 1)
+        # Load the canvas on screen.
+        self.canvas = self.matrix.SwapOnVSync(self.canvas)
+        # Refresh the Data image.
+        self.image = Image.new('RGB', (self.width, self.height))
+        self.draw = ImageDraw.Draw(self.image)
+        t.sleep(30)
+        if self.data is not None:
+           pass
 
     def _draw_pregame(self, game):
             time = self.data.get_current_date()
