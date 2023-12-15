@@ -33,7 +33,7 @@ class MainRenderer:
         self.canvas = self.matrix.SwapOnVSync(self.canvas)
 
     def display_nba_logo(self):
-        nba_logo = Image.open('/logos/NBA.png').resize((22, 22), Image.ANTIALIAS)
+        nba_logo = Image.open('logos/NBA.png').resize((22, 22), Image.ANTIALIAS)
         self.canvas.SetImage(nba_logo.convert("RGB"), 22, 1)
 
     def display_team_logos(self, game, away_logo_position, home_logo_position):
