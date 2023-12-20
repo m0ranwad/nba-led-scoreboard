@@ -26,7 +26,7 @@ class Data:
         # self.scores = {}
 
     def get_current_date(self):
-        return datetime.now()
+        return datetime.utcnow()
     
     def refresh_game(self):
         self.game = self.choose_game()
