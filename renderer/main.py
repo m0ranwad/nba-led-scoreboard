@@ -119,7 +119,7 @@ class MainRenderer:
         Determines the state of the game and calls the appropriate method to draw the game information.
         """
         current_time = self.data.get_current_date()
-        gametime = datetime.strptime(game['date'], "%Y-%m-%dT%H:%MZ")
+        gametime = self.data.get_gametime()
 
         if game['state'] == 'pre':
             if current_time > gametime - timedelta(hours=1):
@@ -206,7 +206,7 @@ class MainRenderer:
         Draws the countdown to game start.
         """
         current_time = self.data.get_current_date()
-        game_datetime = datetime.strptime(game['date'], "%Y-%m-%dT%H:%MZ")
+        game_datetime = self.data.get_gametime()
 
         # Calculate remaining time until the game
         if current_time < game_datetime:
